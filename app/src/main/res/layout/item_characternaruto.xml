@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/characterLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="@drawable/rounded_background"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="25dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgCharacter"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:scaleType="centerCrop"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFFFFF"
+        app:civ_circle_background_color="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/lblName"
+
+        android:fontFamily="@font/njnaruto"
+        android:layout_width="273dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:text="Nombre: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+</LinearLayout>

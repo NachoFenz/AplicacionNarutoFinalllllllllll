@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "275515639208",
+    "project_id": "narutoappfinal",
+    "storage_bucket": "narutoappfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275515639208:android:59db21683dbff18005899d",
+        "android_client_info": {
+          "package_name": "com.example.aplicacionnarutofinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275515639208-q8g1jmfqq78n3ahqjjieuldiqt8hmg1p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplicacionnarutofinal",
+            "certificate_hash": "86ef7e42fc185dd1575a34322bed2fbec52db060"
+          }
+        },
+        {
+          "client_id": "275515639208-s4ukqbrc5jt7i78ld5q4kndu022qinqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA9aB7RbUiHMJbfspHaJEgBb22F52L_ks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275515639208-77tjipr0qhm6nhq6883salu8p1r3joni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
