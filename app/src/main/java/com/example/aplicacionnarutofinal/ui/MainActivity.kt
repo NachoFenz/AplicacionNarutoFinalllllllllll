@@ -47,10 +47,21 @@ class MainActivity : AppCompatActivity() {
         rvCharactersNaruto.layoutManager = LinearLayoutManager(this)
         adapter = CharactersNarutoAdapter(::onCharacterClick)
         rvCharactersNaruto.adapter = adapter
+        val btnRight: Button = findViewById(R.id.btnRight)
+        val btnLeft: Button = findViewById(R.id.btnLeft)
 
         val btnLogout: Button = findViewById(R.id.btnLogout)
         btnLogout.setOnClickListener {
             signOut()
+        }
+        btnLeft.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnRight.setOnClickListener {
+            val intent = Intent(this, FavoriteActivity::class.java)
+            startActivity(intent)
         }
 
         val searchView: SearchView = findViewById(R.id.searchView)

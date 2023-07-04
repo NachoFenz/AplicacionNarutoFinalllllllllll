@@ -35,9 +35,14 @@ class CharacterDetailsActivity : AppCompatActivity() {
     private fun bindViews() {
         val btnFavorito: Button = findViewById(R.id.btnfavoritos)
         val btnRight: Button = findViewById(R.id.btnRight)
+        val btnLeft: Button = findViewById(R.id.btnLeft)
 
         btnFavorito.setOnClickListener {
             addCharacterToFavorites()
+        }
+        btnLeft.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
 
         btnRight.setOnClickListener {

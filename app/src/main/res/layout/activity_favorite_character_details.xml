@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ui.LoginActivity">
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/imgLogoNaruto"
@@ -98,12 +97,6 @@
             android:layout_marginStart="2dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btnfavoritos"
-            android:layout_width="188dp"
-            android:layout_height="wrap_content"
-            android:text="Añadir a favoritos" />
 
     </LinearLayout>
 
