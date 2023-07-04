@@ -1,4 +1,5 @@
 package com.example.aplicacionnarutofinal.ui
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,16 +10,14 @@ import com.bumptech.glide.Glide
 import com.example.aplicacionnarutofinal.R
 import com.example.aplicacionnarutofinal.model.CharacterNaruto
 import com.example.aplicacionnarutofinal.model.Debut
-import com.example.aplicacionnarutofinal.ui.LoginActivity
-import com.example.aplicacionnarutofinal.ui.MainActivity
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CharacterDetailsActivity : AppCompatActivity() {
 
     private lateinit var character: CharacterNaruto
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,39 +25,24 @@ class CharacterDetailsActivity : AppCompatActivity() {
 
         character = intent.getParcelableExtra("characterNaruto")!!
 
+        firebaseAuth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+
         bindViews()
         displayCharacterDetails()
     }
 
     private fun bindViews() {
-        val lblName: TextView = findViewById(R.id.lblName)
-        val lblDebut: TextView = findViewById(R.id.lblDebut)
-        val imgCharacter: ImageView = findViewById(R.id.imgCharacter)
-        val btnLeft: Button = findViewById(R.id.btnLeft)
-        val btnLogout: Button = findViewById(R.id.btnLogout)
+        val btnFavorito: Button = findViewById(R.id.btnfavoritos)
+        val btnRight: Button = findViewById(R.id.btnRight)
 
-        btnLeft.setOnClickListener {
-            // Redirigir al MainActivity
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+        btnFavorito.setOnClickListener {
+            addCharacterToFavorites()
         }
 
-        btnLogout.setOnClickListener {
-            // Cerrar la sesión de Google
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .build()
-            val googleSignInClient = GoogleSignIn.getClient(this, gso)
-            googleSignInClient.signOut().addOnCompleteListener {
-                // Cerrar sesión en Firebase (si está utilizando Firebase Authentication)
-                FirebaseAuth.getInstance().signOut()
-
-                // Redirigir a la pantalla de inicio de sesión
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+        btnRight.setOnClickListener {
+            val intent = Intent(this, FavoriteActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -66,7 +50,7 @@ class CharacterDetailsActivity : AppCompatActivity() {
         val lblName: TextView = findViewById(R.id.lblName)
         val lblDebut: TextView = findViewById(R.id.lblDebut)
         val imgCharacter: ImageView = findViewById(R.id.imgCharacter)
-        // Display other details as needed
+        // Mostrar otros detalles según sea necesario
 
         lblName.text = character.name
 
@@ -98,5 +82,39 @@ class CharacterDetailsActivity : AppCompatActivity() {
         debut.appearsIn?.let { debutList.add("Appears In: $it") }
 
         return debutList.joinToString("\n")
+    }
+
+    private fun addCharacterToFavorites() {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId != null) {
+            val userFavoritesRef = firestore.collection("users").document(userId)
+                .collection("favorites")
+
+            // Verificar si el personaje ya está en favoritos
+            userFavoritesRef.document(character.id.toString()).get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (document != null && document.exists()) {
+                        // El personaje ya está en favoritos
+                        // Aquí puedes mostrar un mensaje o realizar alguna acción
+                    } else {
+                        // Agregar el personaje a favoritos
+                        userFavoritesRef.document(character.id.toString()).set(character)
+                            .addOnCompleteListener { addTask ->
+                                if (addTask.isSuccessful) {
+                                    // El personaje se agregó a favoritos exitosamente
+                                    // Aquí puedes mostrar un mensaje o realizar alguna acción
+                                } else {
+                                    // Error al agregar el personaje a favoritos
+                                    // Aquí puedes mostrar un mensaje de error o realizar alguna acción
+                                }
+                            }
+                    }
+                } else {
+                    // Error al verificar si el personaje está en favoritos
+                    // Aquí puedes mostrar un mensaje de error o realizar alguna acción
+                }
+            }
+        }
     }
 }

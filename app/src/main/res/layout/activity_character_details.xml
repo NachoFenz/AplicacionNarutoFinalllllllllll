@@ -65,14 +65,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/btnFavoritos"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_background"
         android:gravity="center"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_background">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="200dp"
@@ -86,8 +87,8 @@
                 android:layout_width="210dp"
                 android:layout_height="210dp"
                 android:scaleType="centerCrop"
-                app:civ_border_width="2dp"
                 app:civ_border_color="#FFFFFF"
+                app:civ_border_width="2dp"
                 app:civ_circle_background_color="#FFFFFF" />
 
         </LinearLayout>
@@ -97,17 +98,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="24sp"
             android:fontFamily="@font/njnaruto"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_marginStart="2dp"
             android:id="@+id/lblDebut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="8dp"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnfavoritos"
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:text="Añadir a favoritos" />
 
     </LinearLayout>
 

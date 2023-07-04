@@ -2,19 +2,21 @@ package com.example.aplicacionnarutofinal.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
-data class CharacterNaruto(
-    val id: Int,
-    val name: String?,
-    val images: List<String>?,
-    val debut: Debut?,
-    val jutsu: List<String>?,
-    val personal: Any?,
-    val rank: Any?,
-    val voiceActors: VoiceActors?,
-    val family: Family?,
-    val natureType: List<String>?,
-    val uniqueTraits: List<String>?
+data class CharacterNaruto @JvmOverloads constructor(
+    val id: Int = 0,
+    val name: String? = null,
+    val images: List<String>? = null,
+    val debut: Debut? = null,
+    val jutsu: List<String>? = null,
+    @SerializedName("personal_data")
+    val personal: Any? = null,
+    val rank: Any? = null,
+    val voiceActors: VoiceActors? = null,
+    val family: Family? = null,
+    val natureType: List<String>? = null,
+    val uniqueTraits: List<String>? = null
 ) : Parcelable {
     val imageUrl: String?
         get() = images?.firstOrNull()
@@ -25,7 +27,6 @@ data class CharacterNaruto(
         parcel.createStringArrayList(),
         parcel.readParcelable(Debut::class.java.classLoader),
         parcel.createStringArrayList(),
-        // Leer otros campos de CharacterNaruto
         parcel.readValue(Any::class.java.classLoader),
         parcel.readValue(Any::class.java.classLoader),
         parcel.readParcelable(VoiceActors::class.java.classLoader),
@@ -40,7 +41,6 @@ data class CharacterNaruto(
         parcel.writeStringList(images)
         parcel.writeParcelable(debut, flags)
         parcel.writeStringList(jutsu)
-        // Escribir otros campos de CharacterNaruto
         parcel.writeValue(personal)
         parcel.writeValue(rank)
         parcel.writeParcelable(voiceActors, flags)
@@ -65,13 +65,13 @@ data class CharacterNaruto(
 }
 
 data class Debut(
-    val novel: String?,
-    val manga: String?,
-    val movie: String?,
-    val anime: String?,
-    val game: String?,
-    val ova: String?,
-    val appearsIn: String?
+    val novel: String? = null,
+    val manga: String? = null,
+    val movie: String? = null,
+    val anime: String? = null,
+    val game: String? = null,
+    val ova: String? = null,
+    val appearsIn: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -109,7 +109,7 @@ data class Debut(
 }
 
 data class VoiceActors(
-    val english: Any?
+    val english: Any? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readValue(Any::class.java.classLoader))
 
@@ -133,8 +133,8 @@ data class VoiceActors(
 }
 
 data class Family(
-    val incarnationWithTheGodTree: String?,
-    val depoweredForm: String?
+    val incarnationWithTheGodTree: String? = null,
+    val depoweredForm: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -162,7 +162,7 @@ data class Family(
 }
 
 data class CharactersResponse(
-    val characters: List<CharacterNaruto>?
+    val characters: List<CharacterNaruto>? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.createTypedArrayList(CharacterNaruto))
 

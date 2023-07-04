@@ -13,12 +13,17 @@
         android:theme="@style/Theme.AplicacionNarutoFinal"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.CustomProgressDialog"
-            android:exported="true" />
+
         <activity
             android:name=".ui.CharacterDetailsActivity"
-            android:exported="false" /> <!-- Actividad Splash -->
+            android:exported="false" />
+
+        <activity android:name=".ui.FavoriteActivity"
+            android:exported="true"/>
+
+        <!-- Otras actividades existentes en tu archivo AndroidManifest.xml -->
+
+        <!-- Actividad Splash -->
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
@@ -29,15 +34,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Actividad LoginActivity -->
+        </activity>
+
+        <!-- Actividad LoginActivity -->
         <activity
             android:name=".ui.LoginActivity"
-            android:exported="true" /> <!-- Actividad com.example.aplicacionnarutofinal.ui.MainActivity -->
+            android:exported="true" />
+
+        <!-- Actividad com.example.aplicacionnarutofinal.ui.MainActivity -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true" />
 
     </application>
-
 
 </manifest>
