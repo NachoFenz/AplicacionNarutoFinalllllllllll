@@ -36,20 +36,22 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button"
             android:text="Inicio"
-            android:textColor="#FFFFFF" />
+            android:backgroundTint="#FFFFFF"
+            android:fontFamily="@font/njnaruto"
+        android:textColor="#FF5722" />
 
         <Button
             android:id="@+id/btnRight"
-            android:layout_width="9dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:text="Favoritos"
-            android:textColor="#FFFFFF" />
+        android:text="Favoritos"
+            android:backgroundTint="#FFFFFF"
+            android:fontFamily="@font/njnaruto"
+            android:textColor="#FF5722" />
 
     </LinearLayout>
 
@@ -103,7 +105,10 @@
             android:id="@+id/btnfavoritos"
             android:layout_width="188dp"
             android:layout_height="wrap_content"
-            android:text="Añadir a favoritos" />
+            android:text="Añadir a favoritos"
+            android:backgroundTint="#FF5722"
+            android:fontFamily="@font/njnaruto"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 

@@ -1,6 +1,5 @@
 package com.example.aplicacionnarutofinal.ui
 
-import MainViewModel
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aplicacionnarutofinal.R
+import com.example.aplicacionnarutofinal.data.CharactersNarutoRepository
 import com.example.aplicacionnarutofinal.model.CharacterNaruto
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,7 +18,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-
+    private val repository: CharactersNarutoRepository by lazy {
+        CharactersNarutoRepository(applicationContext)
+    }
     private lateinit var viewModel: MainViewModel
     private lateinit var rvCharactersNaruto: RecyclerView
     private lateinit var adapter: CharactersNarutoAdapter
@@ -26,20 +28,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressDialog: CustomProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        repository.clearCache()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         auth = Firebase.auth
 
         progressDialog = CustomProgressDialog(this) // Inicialización de progressDialog
 
-        bindViews()
-        bindViewModel()
+        bindViews() // Configurar las vistas
+        bindViewModel() // Configurar el ViewModel
     }
 
     override fun onStart() {
         super.onStart()
         progressDialog.show()
-        viewModel.onStart()
+        viewModel.onStart() // Iniciar la carga de datos
     }
 
     private fun bindViews() {
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         val btnLogout: Button = findViewById(R.id.btnLogout)
         btnLogout.setOnClickListener {
-            signOut()
+            signOut() // Cerrar sesión
         }
         btnLeft.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -71,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.filterCharacters(newText ?: "")
+                viewModel.filterCharacters(newText ?: "") // Filtrar los personajes según el texto ingresado
                 return true
             }
         })
@@ -80,8 +83,8 @@ class MainActivity : AppCompatActivity() {
     private fun bindViewModel() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.characters.observe(this) { characters ->
-            adapter.setItems(characters)
-            progressDialog.dismiss()
+            adapter.setItems(characters) // Actualizar los personajes en el adaptador
+            progressDialog.dismiss() // Ocultar el diálogo de progreso
         }
     }
 

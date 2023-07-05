@@ -18,8 +18,10 @@ data class CharacterNaruto @JvmOverloads constructor(
     val natureType: List<String>? = null,
     val uniqueTraits: List<String>? = null
 ) : Parcelable {
+    // Propiedad calculada que devuelve la primera URL de imagen (si está disponible) del personaje
     val imageUrl: String?
         get() = images?.firstOrNull()
+    // (El resto del código de la clase se refiere a la implementación Parcelable para permitir que los objetos de esta clase se pasen entre componentes de la app a través de Intents)
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

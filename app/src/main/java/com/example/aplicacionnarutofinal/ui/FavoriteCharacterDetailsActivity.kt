@@ -39,7 +39,6 @@ class FavoriteCharacterDetailsActivity : AppCompatActivity() {
     }
 
     private fun bindViews() {
-        // Aquí puedes realizar la inicialización de vistas adicionales si es necesario
     }
 
     private fun displayCharacterDetails() {

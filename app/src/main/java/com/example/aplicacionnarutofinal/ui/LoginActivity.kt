@@ -25,14 +25,20 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Configurar opciones de inicio de sesión de Google
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+
+        // Inicializar FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
+
+        // Obtener referencia al botón de inicio de sesión con Google en el diseño
         loginButton = findViewById(R.id.googleSignInButton)
 
+        // Configurar el clic del botón de inicio de sesión
         loginButton.setOnClickListener {
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, 100)
@@ -41,9 +47,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        // Verificar si ya hay un usuario autenticado al iniciar la actividad
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
-            // Si ya hay una sesión iniciada, redirigir a com.example.aplicacionnarutofinal.ui.MainActivity
+            // Si ya hay una sesión iniciada, redirigir a MainActivity
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -52,6 +60,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // Manejar el resultado de la actividad de inicio de sesión con Google
         if (requestCode == 100) {
             val accountTask = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
@@ -64,9 +73,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun firebaseAuthWithGoogleAccount(account: GoogleSignInAccount?) {
+        // Obtener las credenciales de autenticación de Google
         val credential = GoogleAuthProvider.getCredential(account!!.idToken, null)
+
+        // Iniciar sesión con las credenciales en FirebaseAuth
         firebaseAuth.signInWithCredential(credential)
             .addOnSuccessListener { authResult ->
+                // Autenticación exitosa
                 val firebaseUser = firebaseAuth.currentUser
                 val uid = firebaseUser!!.uid
                 val email = firebaseUser.email
@@ -78,10 +91,12 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Cuenta existente...", Toast.LENGTH_LONG).show()
                 }
 
+                // Redirigir a MainActivity
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener { e->
+                // Autenticación fallida
                 Toast.makeText(this@LoginActivity, "Login fallido...", Toast.LENGTH_LONG).show()
             }
     }

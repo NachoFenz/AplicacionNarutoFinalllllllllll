@@ -22,6 +22,8 @@ class FavoriteActivity : AppCompatActivity(), CharacterFavoritesAdapter.OnItemCl
         val btnRight: Button = findViewById(R.id.btnRight)
         val btnLeft: Button = findViewById(R.id.btnLeft)
 
+
+        // Configurar RecyclerView y adaptador
         recyclerView = findViewById(R.id.recyclerViewCharacters)
         characterAdapter = CharacterFavoritesAdapter()
         characterAdapter.setOnItemClickListener(this)
@@ -30,8 +32,10 @@ class FavoriteActivity : AppCompatActivity(), CharacterFavoritesAdapter.OnItemCl
             adapter = characterAdapter
         }
 
+        // Obtener los personajes favoritos desde Firebase Firestore
         getFavoriteCharactersFromFirebase()
 
+        // Configurar los botones de navegación
         btnLeft.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -43,6 +47,7 @@ class FavoriteActivity : AppCompatActivity(), CharacterFavoritesAdapter.OnItemCl
         }
     }
 
+    // Obtener los personajes favoritos desde Firebase Firestore
     private fun getFavoriteCharactersFromFirebase() {
         val userId = FirebaseAuth.getInstance().currentUser?.uid
 

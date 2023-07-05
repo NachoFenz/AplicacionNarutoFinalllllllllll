@@ -1,4 +1,5 @@
 package com.example.aplicacionnarutofinal.ui
+
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -16,10 +17,12 @@ import com.example.aplicacionnarutofinal.R
 
 class CustomProgressDialog(context: Context) {
 
+    // Propiedades privadas
     private var dialog: CustomDialog
     private var cpCardView: CardView
     private var imageView: ImageView
 
+    // Método para mostrar el cuadro de diálogo
     fun show() {
         dialog.show()
         Glide.with(imageView)
@@ -28,23 +31,24 @@ class CustomProgressDialog(context: Context) {
             .into(imageView)
     }
 
+    // Método para ocultar el cuadro de diálogo
     fun dismiss() {
         dialog.dismiss()
     }
 
     init {
+        // Inicialización del cuadro de diálogo personalizado
         val inflater = (context as Activity).layoutInflater
         val view = inflater.inflate(R.layout.activity_custom_progress_dialog, null)
 
         cpCardView = view.findViewById(R.id.cp_cardview)
         imageView = view.findViewById(R.id.cp_image)
 
-
-        // Custom Dialog initialization
         dialog = CustomDialog(context)
         dialog.setContentView(view)
     }
 
+    // Método privado para aplicar un filtro de color a un Drawable
     private fun setColorFilter(drawable: Drawable, color: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             drawable.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_ATOP)
@@ -54,9 +58,10 @@ class CustomProgressDialog(context: Context) {
         }
     }
 
+    // Clase interna que representa el cuadro de diálogo personalizado
     class CustomDialog(context: Context) : Dialog(context) {
         init {
-            // Set Semi-Transparent Color for Dialog Background
+            // Establecer un color semitransparente para el fondo del cuadro de diálogo
             window?.decorView?.setOnApplyWindowInsetsListener { _, insets ->
                 insets.consumeSystemWindowInsets()
             }

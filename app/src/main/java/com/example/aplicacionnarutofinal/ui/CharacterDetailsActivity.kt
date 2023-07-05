@@ -108,16 +108,13 @@ class CharacterDetailsActivity : AppCompatActivity() {
                             .addOnCompleteListener { addTask ->
                                 if (addTask.isSuccessful) {
                                     // El personaje se agregó a favoritos exitosamente
-                                    // Aquí puedes mostrar un mensaje o realizar alguna acción
                                 } else {
                                     // Error al agregar el personaje a favoritos
-                                    // Aquí puedes mostrar un mensaje de error o realizar alguna acción
                                 }
                             }
                     }
                 } else {
                     // Error al verificar si el personaje está en favoritos
-                    // Aquí puedes mostrar un mensaje de error o realizar alguna acción
                 }
             }
         }

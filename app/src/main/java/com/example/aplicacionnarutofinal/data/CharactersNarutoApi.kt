@@ -1,6 +1,5 @@
 package com.example.aplicacionnarutofinal.data
 
-import com.example.aplicacionnarutofinal.model.CharacterNaruto
 import com.example.aplicacionnarutofinal.model.CharactersResponse
 import retrofit2.Call
 import retrofit2.http.GET
